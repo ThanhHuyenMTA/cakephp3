@@ -20,26 +20,23 @@
 	    } 
         //end
 
-        public function  addcomment($id)
+        public function  addcomment()
 	    {
 	    	//call session
 	    	$Sessionname= $this->request->session()->read('Auth.User.username');
-	    	//pr($Sessionname);die();
 	    	if($Sessionname){
-	    		 // $article = $this->Users->get($id);
-	    		$id_article=$this->Articles->get($id) ;
-	    		pr($id_article);die();
-	    		$this->request->data['id-article']=$id_article;
-	    		$id_user=$this->request->session()->read('Auth.User.id'); 
-	    		$this->request->data['id-user']=$id_user;
-	    		
-				$comment  = $this->Comments->newEntity($this->request->data);
 				if ($this->request->is('post')) {
+					$id_user=$this->request->session()->read('Auth.User.id'); 
+					$id_article=$this->request->session()->read('id_article'); 
+	    			$this->request->data['id_user']=$id_user;
+	    			$this->request->data['id_article']=$id_article; 
+	    			//pr($id_article);die();
+					$comment  = $this->Comments->newEntity($this->request->data);
 		            if($comment->errors()){
 		            	$this->Flash->error(__('Unable to add your comment.'));
 		        }else{
 		            	if ($this->Comments->save($comment)) {
-			                return $this->redirect(['action' => '../Articles/view/1']);
+			                 return $this->redirect('/articles/view/'.$id_article);
 		                }      
 		            }
 		        }

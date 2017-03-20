@@ -34,7 +34,7 @@
 	            ->notEmpty('content', 'Please Enter your content') 
 	            ->add('content', [
 	                'length' => [
-	                    'rule' => ['minLength',5],
+	                    'rule' => ['minLength',1],
 	                    'message' => 'Titles need to be at least 5 characters long',
 	                ]
 	            ]);    

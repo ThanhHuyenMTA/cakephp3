@@ -96,18 +96,9 @@ class AppController extends Controller
         }
         //load Departments
         if( $this->loadModel('Departments')){
-             $menus = $this->Departments->Find('all');
-             $this->set(compact('menus'));  
+             $department = $this->Departments->Find('all');
+             $this->set(compact('department'));  
         }
 
-        //check login member
-         if($this->request->session()->read('Auth.Member')){
-            $this->set('logInM',true);
-        }else{
-            $this->set('logInM',false);
-        }
-       
-
-       
     }
 }
